@@ -6,7 +6,7 @@ const b = 8/3
 const r = 28
 const dt = 0.001
 
-# this is test.
+# this is test2.
 
 function f(t, y)
     [sigma*(y[2] - y[1]), r*y[1]-y[2]-y[1]y[3], y[1]y[2]-b*y[3]]
