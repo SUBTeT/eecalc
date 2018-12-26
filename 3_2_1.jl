@@ -42,14 +42,14 @@ function main()
     end
 
     p1 = plot(t_ary, e_r, legend=:none, xlabel="time", ylabel="error",
-    title="(a)Time evolution of the error", aspect_ratio=10)
+    title="Time evolution of the error")
     p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend=:none, xlabel="v_x", ylabel="v_y",
-    title="(b)Trajectory of v_c", aspect_ratio=1)
+    title="Trajectory of v_c", aspect_ratio=1, size=(400, 450))
 
     # plot(p1, p2)
 
-    p = plot(p1, p2)
-    png(p, "img/3-2-1.png")
+    png(p1, "img/3-2-1-a.png")
+    png(p2, "img/3-2-1-b.png")
 end
 
 main()

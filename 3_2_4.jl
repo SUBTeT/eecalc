@@ -46,9 +46,9 @@ function main()
     end
 
     p1 = plot(t_ary, e_r, legend=:none, xlabel="time", ylabel="error",
-    title="(a)Time evolution of the error")
+    title="Time evolution of the error")
     p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend=:none, xlabel="v_x", ylabel="v_y",
-    title="(b)Trajectory of v_c", aspect_ratio=1)
+    title="Trajectory of v_c", aspect_ratio=1, size=(400, 400))
 
     # p = plot(p1, p2)
     # png(p, "img/3-2-3_a.png")
@@ -83,13 +83,15 @@ function main()
     end
 
     p3 = scatter(p_list, log2E_r, legend=:none, xlabel="p", ylabel="log2(E_r)",
-    title="(c)The maximum value of the error",
-    xticks=[p for p in p_list if p % 3 == 0], aspect_ratio=0.2)
+    title="The maximum value of the error",
+    xticks=[p for p in p_list if p % 3 == 0])
 
-    l = @layout [a b; c]
-    p = plot(p1, p2, p3, layout = l)
-    png(p, "img/3-2-4.png")
-    a, b = coeffs(polyfit(p_list, log2E_r, 1))
+    # l = @layout [a b; c]
+    # p = plot(p1, p2, p3, layout = l)
+    png(p1, "img/3-2-4-a.png")
+    png(p2, "img/3-2-4-b.png")
+    png(p3, "img/3-2-4-c.png")
+    a, b = coeffs(polyfit(p_list[1:11], log2E_r[1:11], 1))
     println(b)
     # plot(p1, p2, p3, layout=l)
 end
