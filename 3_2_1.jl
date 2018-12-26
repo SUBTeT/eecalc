@@ -5,7 +5,7 @@ const tau = 2pi
 const t_last_plot = 5tau
 const t_last_error = tau
 
-function f(t::Float64, y::Array{Float64})
+function f(t::Float64, y::Array{Float64, 1})
     [y[2], -y[1]]
 end
 
@@ -16,7 +16,7 @@ function euler(t_ary, v_c_ary::Matrix{Float64}, dt::Float64)
 end
 
 function next(t_ary, v_c_ary::Matrix{Float64}, i::Int, dt::Float64)
-    return v_c_ary[i-1, :] + dt * f(undef, v_c_ary[i-1, :])
+    return v_c_ary[i-1, :] + dt * f(0.0, v_c_ary[i-1, :])
 end
 
 # main
@@ -42,9 +42,11 @@ function main()
     end
 
     p1 = plot(t_ary, e_r, legend=:none, xlabel="time", ylabel="error",
-    title="Time evolution of the error", aspect_ratio=10)
+    title="(a)Time evolution of the error", aspect_ratio=10)
     p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend=:none, xlabel="v_x", ylabel="v_y",
-    title="Trajectory of v_c", aspect_ratio=1)
+    title="(b)Trajectory of v_c", aspect_ratio=1)
+
+    # plot(p1, p2)
 
     p = plot(p1, p2)
     png(p, "img/3-2-1.png")

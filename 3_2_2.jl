@@ -16,7 +16,7 @@ function euler(t_ary, v_c_ary::Matrix{Float64}, dt::Float64)
 end
 
 function next(t_ary, v_c_ary::Matrix{Float64}, i::Int, dt::Float64)
-    return v_c_ary[i-1, :] + dt * f(undef, v_c_ary[i-1, :])
+    return v_c_ary[i-1, :] + dt * f(0.0, v_c_ary[i-1, :])
 end
 
 # main
@@ -52,7 +52,7 @@ function main()
     png(p, "img/3-2-2.png")
     a, b = coeffs(polyfit(p_list, log2E_r, 1))
     println(b)
-    # plot(p_list, log2E_r, legend=:none, xlabel="p", ylabel="log2(E_r)",
+    # scatter(p_list, log2E_r, legend=:none, xlabel="p", ylabel="log2(E_r)",
     # title="The maximum value of the error",
     # xticks=[p for p in p_list if p % 3 == 0])
 end

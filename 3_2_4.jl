@@ -16,10 +16,10 @@ function runge_kutta(t_ary, v_c_ary::Matrix{Float64}, dt::Float64)
 end
 
 function next(t_ary, v_c_ary::Matrix{Float64}, i::Int, dt::Float64)
-    k1 = f(undef, v_c_ary[i-1, :])
-    k2 = f(undef, v_c_ary[i-1, :] + dt / 2 * k1)
-    k3 = f(undef, v_c_ary[i-1, :] + dt / 2 * k2)
-    k4 = f(undef, v_c_ary[i-1, :] + dt * k3)
+    k1 = f(0.0, v_c_ary[i-1, :])
+    k2 = f(0.0, v_c_ary[i-1, :] + dt / 2 * k1)
+    k3 = f(0.0, v_c_ary[i-1, :] + dt / 2 * k2)
+    k4 = f(0.0, v_c_ary[i-1, :] + dt * k3)
     return v_c_ary[i-1, :] + dt * (k1 + 2*k2 + 2*k3 + k4)/6
 end
 
@@ -46,9 +46,9 @@ function main()
     end
 
     p1 = plot(t_ary, e_r, legend=:none, xlabel="time", ylabel="error",
-    title="Time evolution of the error")
+    title="(a)Time evolution of the error")
     p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend=:none, xlabel="v_x", ylabel="v_y",
-    title="Trajectory of v_c", aspect_ratio=1)
+    title="(b)Trajectory of v_c", aspect_ratio=1)
 
     # p = plot(p1, p2)
     # png(p, "img/3-2-3_a.png")
@@ -83,14 +83,15 @@ function main()
     end
 
     p3 = scatter(p_list, log2E_r, legend=:none, xlabel="p", ylabel="log2(E_r)",
-    title="The maximum value of the error",
-    xticks=[p for p in p_list if p % 3 == 0])
+    title="(c)The maximum value of the error",
+    xticks=[p for p in p_list if p % 3 == 0], aspect_ratio=0.2)
 
-    p = plot(p1, p2, p3)
+    l = @layout [a b; c]
+    p = plot(p1, p2, p3, layout = l)
     png(p, "img/3-2-4.png")
     a, b = coeffs(polyfit(p_list, log2E_r, 1))
     println(b)
-    # plot(p1, p2, p3)
+    # plot(p1, p2, p3, layout=l)
 end
 
 main()

@@ -1,12 +1,12 @@
 @time using Reactive, Interact, Plots
 gr()
 
-const N = 100
-const dx = 1.0 / N
-const dt = 0.001
-const c = 5
-const T_D = 0.1
-const mu = c^2 * dt^2 / dx^2
+N = 100
+dx = 1.0 / N
+dt = 0.001
+c = 5
+T_D = 0.1
+mu = c^2 * dt^2 / dx^2
 
 const limit = trunc(Int, T_D / dt * 4)  # period
 
