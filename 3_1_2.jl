@@ -56,8 +56,6 @@ function main()
         ylims!(-1.3, 1.3)
     end
     gif(anim, "gif/3-1-2.gif", fps = 30)
-
-
 end
 
 main()
