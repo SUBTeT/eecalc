@@ -43,6 +43,7 @@ function main()
     title="Trajectory of (y_1, y_2)")
     p = plot(p1, p2)
     png(p, "img/3-3-1.png")
+    # plot(p1, p2)
     #=
     @time anim = @animate for i=1:50:length(y_ary[:, 1])
         plot(y_ary[1:i, 1], y_ary[1:i, 2], y_ary[1:i, 3], legend=:none, title="Lorenz attractor",
