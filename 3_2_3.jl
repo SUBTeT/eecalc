@@ -5,17 +5,17 @@ const tau = 2pi
 const t_last_plot = 5tau
 const t_last_error = tau
 
-function f(t, y)
+function f(t::Float64, y::Array{Float64})
     [y[2], -y[1]]
 end
 
-function heun(t_ary, v_c_ary, dt)
+function heun(t_ary, v_c_ary::Matrix{Float64}, dt::Float64)
     for i = 2:length(t_ary)
         v_c_ary[i, :] = next(t_ary, v_c_ary, i, dt)
     end
 end
 
-function next(t_ary, v_c_ary, i, dt)
+function next(t_ary, v_c_ary::Matrix{Float64}, i::Int, dt::Float64)
     k1 = f(undef, v_c_ary[i-1, :])
     k2 = f(undef, v_c_ary[i-1, :] + dt * k1)
     return v_c_ary[i-1, :] + dt * (k1 + k2)/2
