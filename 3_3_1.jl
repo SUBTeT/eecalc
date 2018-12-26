@@ -6,6 +6,7 @@ const b = 8/3
 const r = 28
 const dt = 0.001
 
+
 function f(t::Float64, y::Array{Float64})
     [sigma*(y[2] - y[1]), r*y[1]-y[2]-y[1]y[3], y[1]y[2]-b*y[3]]
 end
@@ -39,6 +40,7 @@ function main()
     title="Time evolution of y_1")
     p2 = plot(y_ary[:, 1], y_ary[:, 2], legend=:none, xlabel="y_1", ylabel="y_2",
     title="Trajectory of (y_1, y_2)")
+
     p = plot(p1, p2)
     png(p, "img/3-3-1.png")
     # plot(p1, p2)
