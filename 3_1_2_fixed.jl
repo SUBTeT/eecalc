@@ -1,19 +1,16 @@
 @time using Reactive, Interact, Plots
 gr()
 
-N = 100
-dx = 1.0 / N
-dt = 0.001
-c = 5
-T_D = 0.1
-mu = c^2 * dt^2 / dx^2
+const N = 100
+const dx = 1.0 / N
+const dt = 0.001
+const c = 5
+const T_D = 0.1
+const mu = c^2 * dt^2 / dx^2
 
-limit = trunc(Int, T_D / dt * 4)  # period
+const limit = trunc(Int, T_D / dt * 4)  # period
 
-x = range(0, stop = 1 - dx, step = dx)
-t = range(0, stop = limit, step = dt)
-
-function calc_next(u, i)
+function calc_next(u::Array{Float64, 2}, i::Int)
     u_k_next = zeros(Float64, N)
 
     # fixed end
@@ -32,7 +29,7 @@ function calc_next(u, i)
     return u_k_next
 end
 
-function make_u(u)
+function make_u(u::Array{Float64, 2})
     for i = 3:limit
         u_k_next = calc_next(u, i)
         u[i,:] = u_k_next

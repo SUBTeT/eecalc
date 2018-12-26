@@ -6,19 +6,17 @@ const b = 8/3
 const r = 28
 const dt = 0.001
 
-# this is test.
-
-function f(t, y)
+function f(t::Float64, y::Array{Float64})
     [sigma*(y[2] - y[1]), r*y[1]-y[2]-y[1]y[3], y[1]y[2]-b*y[3]]
 end
 
-function runge_kutta(t_ary, y_ary, dt)
+function runge_kutta(t_ary, y_ary::Matrix{Float64}, dt::Float64)
     for i = 2:length(t_ary)
         y_ary[i, :] = next(t_ary, y_ary, i, dt)
     end
 end
 
-function next(t_ary, y_ary, i, dt)
+function next(t_ary, y_ary::Matrix{Float64}, i::Int, dt::Float64)
     k1 = f(undef, y_ary[i-1, :])
     k2 = f(undef, y_ary[i-1, :] + dt / 2 * k1)
     k3 = f(undef, y_ary[i-1, :] + dt / 2 * k2)
