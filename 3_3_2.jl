@@ -49,7 +49,9 @@ function main()
     title="Time evolution of error") # 0, 10^(-2)
     p2 = plot(t_ary, error_list[2, :], legend=:none, xlabel="time", ylabel="error",
     title="Time evolution of error") # 0, 10^(-3)
-    plot(p1, p2)
+    # plot(p1, p2)
+    png(p1, "img/3-3-2-a.png")
+    png(p2, "img/3-3-2-b.png")
 
     #=
     temp = y_ary_of_list[3, :, :]

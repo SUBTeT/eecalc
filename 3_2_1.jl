@@ -43,8 +43,9 @@ function main()
 
     p1 = plot(t_ary, e_r, legend=:none, xlabel="time", ylabel="error",
     title="Time evolution of the error")
-    p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend=:none, xlabel="v_x", ylabel="v_y",
-    title="Trajectory of v_c", aspect_ratio=1, size=(400, 450))
+    p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], xlabel="v_x", ylabel="v_y",
+    title="Trajectory of v_c", aspect_ratio=1, size=(400, 450), label="Euler")
+    plot!(v_a_ary[:, 1], v_a_ary[:, 2], label="analytical", legend=:topright)
 
     # plot(p1, p2)
 
