@@ -16,15 +16,15 @@ function heun(t_ary, v_c_ary::Matrix{Float64}, dt::Float64)
 end
 
 function next(t_ary, v_c_ary::Matrix{Float64}, i::Int, dt::Float64)
-    k1 = f(0.0, v_c_ary[i-1, :])
-    k2 = f(0.0, v_c_ary[i-1, :] + dt * k1)
-    return v_c_ary[i-1, :] + dt * (k1 + k2)/2
+    k1 = f(0.0, v_c_ary[i - 1, :])
+    k2 = f(0.0, v_c_ary[i - 1, :] + dt * k1)
+    return v_c_ary[i - 1, :] + dt * (k1 + k2) / 2
 end
 
 # main
 function main()
-    dt = tau/64
-    t_ary = range(0, stop=t_last_plot, step=dt)
+    dt = tau / 64
+    t_ary = range(0, stop = t_last_plot, step = dt)
     v_c_ary = Matrix{Float64}(undef, length(t_ary), 2)
 
     # make v_a_ary
@@ -43,11 +43,11 @@ function main()
         e_r[i] = norm(v_c_ary[i,:] - v_a_ary[i,:])
     end
 
-    p1 = plot(t_ary, e_r, legend=:none, xlabel="time", ylabel="error",
-    title="Time evolution of the error")
-    p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend=:none, xlabel="v_x", ylabel="v_y",
-    title="Trajectory of v_c", aspect_ratio=1, size=(400, 400), label="Heun")
-    plot!(v_a_ary[:, 1], v_a_ary[:, 2], label="analytical", legend=:topright)
+    p1 = plot(t_ary, e_r, legend = :none, xlabel = "time", ylabel = "error",
+    title = "Time evolution of the error")
+    p2 = scatter(v_c_ary[:, 1], v_c_ary[:, 2], legend = :none, xlabel = "v_x", ylabel = "v_y",
+    title = "Trajectory of v_c", aspect_ratio = 1, size = (400, 400), label = "Heun")
+    plot!(v_a_ary[:, 1], v_a_ary[:, 2], label = "analytical", legend = :topright)
 
     # p = plot(p1, p2)
     # png(p, "img/3-2-3_a.png")
@@ -56,11 +56,11 @@ function main()
     # dt is 'updated' below.
 
     p_list = 3:18
-    dt_list =[tau/2^p for p in p_list]
-    log2E_r= Float64[]
+    dt_list = [tau / 2^p for p in p_list]
+    log2E_r = Float64[]
 
     @time for dt in dt_list
-        t_ary = range(0, stop=t_last_error, step=dt)
+        t_ary = range(0, stop = t_last_error, step = dt)
         v_c_ary = Matrix{Float64}(undef, length(t_ary), 2)
 
         # make v_a_ary
@@ -82,9 +82,9 @@ function main()
     end
 
     # l = @layout [a b; c]
-    p3 = scatter(p_list, log2E_r, legend=:none, xlabel="p", ylabel="log2(E_r)",
-    title="The maximum value of the error",
-    xticks=[p for p in p_list if p % 3 == 0])
+    p3 = scatter(p_list, log2E_r, legend = :none, xlabel = "p", ylabel = "log2(E_r)",
+    title = "The maximum value of the error",
+    xticks = [p for p in p_list if p % 3 == 0])
     # plot(p1, p2, p3, layout=l)
     png(p1, "img/3-2-3-a.png")
     png(p2, "img/3-2-3-b.png")
@@ -94,4 +94,4 @@ function main()
     # plot(p1, p2, p3, layout=l)
 end
 
-main()
+@time main()
